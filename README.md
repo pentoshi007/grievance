@@ -134,11 +134,6 @@ grievance/
       ```
     - The Express server will now serve the built React app from `client/dist` along with handling API requests. Access the application at the server's URL (e.g., `http://localhost:5001` or your deployment URL).
 
-## Portal Access
-
-- **Secret Code:** `baby`
-- **Intended User:** Anuhya
-- **Recipient of Grievances:** Aniket
 
 ---
 
