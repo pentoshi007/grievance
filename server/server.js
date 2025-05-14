@@ -22,9 +22,14 @@ dotenv.config();
 // The app object conventionally denotes the Express application.
 const app = express();
 
-// This line applies the CORS middleware to your Express application.
-// This allows your server to accept requests from different origins (e.g., your React frontend).
-app.use(cors());
+// CORS configuration: Allow requests from your Vercel frontend URL
+// We don't know the Vercel URL yet, so we'll allow all for now, or you can add a placeholder.
+// For production, it's best to restrict this to your actual frontend domain.
+const corsOptions = {
+    origin: process.env.FRONTEND_URL || '*', // Use an env variable for frontend URL or allow all
+    optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // This line adds a middleware to parse incoming requests with JSON payloads.
 // It is based on body-parser and allows you to access request data in req.body.
@@ -68,32 +73,11 @@ const grievanceRoutes = require('./routes/grievanceRoutes');
 // All API routes are prefixed with /api
 app.use('/api/grievances', grievanceRoutes);
 
-// --- Production Build Serving Logic --- 
-// This block checks if the Node environment is set to 'production'.
-// This is a common way to differentiate between development and production behavior.
-if (process.env.NODE_ENV === 'production') {
-    // This line tells Express to serve static files (like CSS, JS, images) 
-    // from the 'dist' directory inside the 'client' folder.
-    // path.resolve constructs an absolute path to where the React app will be built.
-    // __dirname gives the directory of the current module (server.js), 
-    // then we go up one level ('..') to the project root, then into 'client/dist'.
-    app.use(express.static(path.resolve(__dirname, '..', 'client', 'dist')));
-
-    // This is a catch-all route handler.
-    // It serves the 'index.html' file from the client's build directory 
-    // for any GET request that doesn't match an API route or a static file defined above.
-    // This is crucial for single-page applications (SPAs) like React apps, 
-    // as it allows client-side routing to handle different paths.
-    app.get('*', (req, res) =>
-        res.sendFile(path.resolve(__dirname, '..', 'client', 'dist', 'index.html'))
-    );
-} else {
-    // In development, the root path ('/') just sends a welcome message for the API.
-    // The React app is served by its own dev server (Vite on port 3000).
-    app.get('/', (req, res) => {
-        res.json({ message: "Welcome to Anuhya's Heartfelt Grievance Portal API (Development Mode)" });
-    });
-}
+// --- Root Route for API --- 
+// This will now be the default for the backend server.
+app.get('/', (req, res) => {
+    res.json({ message: "Welcome to Anuhya's Heartfelt Grievance Portal API" });
+});
 
 // This line starts the Express server and makes it listen for incoming requests on the specified port.
 // The callback function is executed once the server has successfully started.
