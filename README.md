@@ -1,4 +1,4 @@
-#Grievance Portal ❤️
+# Grievance Portal ❤️
 
 A MERN stack application designed for Anuhya to submit her grievances to Aniket, built with love and a modern, responsive UI.
 
