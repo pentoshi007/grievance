@@ -1,0 +1,227 @@
+/* Main container for the Thank You page content */
+/* This rule styles the main div that wraps all the content on the thank you page. */
+.thankYouContainer {
+    /* Applies a semi-transparent white background, a key part of the glassmorphism effect. */
+    background: rgba(255, 255, 255, 0.1);
+    /* Applies a blur effect to the area behind this element, creating the frosted glass look. */
+    backdrop-filter: blur(10px);
+    /* Webkit-prefixed version for Safari compatibility. */
+    -webkit-backdrop-filter: blur(10px);
+    /* Rounds the corners of the container. */
+    border-radius: 20px;
+    /* Adds a subtle, light border to further enhance the glassy edge. */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    /* Sets the padding inside the container (top/bottom, left/right). */
+    padding: 2.5rem 2rem;
+    /* Adds a soft shadow to give the container a sense of depth, making it appear lifted. */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    /* Sets a maximum width for the container to prevent it from becoming too wide on large screens. */
+    max-width: 550px;
+    /* Sets the width to 90% of its parent, ensuring some space from screen edges on smaller views. */
+    width: 90%;
+    /* Centers the container on the page (horizontally, when combined with display:flex on parent). */
+    margin: 2rem auto;
+    /* Uses flexbox to arrange its children. */
+    display: flex;
+    /* Stacks children vertically. */
+    flex-direction: column;
+    /* Centers children horizontally along the cross-axis. */
+    align-items: center;
+    /* Centers text content within the container for all direct children. */
+    text-align: center;
+    /* Defines the space between child elements (the text lines and button). */
+    gap: 0.75rem;
+}
+
+/* Styling for the main "Thank you, [Name]" title */
+/* This targets the h1 element used for the main greeting. */
+.thankYouTitle {
+    /* Sets the text color to a vibrant pink, matching the example image. */
+    color: #E91E63;
+    /* Vibrant pink, similar to example */
+    font-size: 2.6rem;
+    font-weight: normal;
+    /* Pacifico is decorative */
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.heartEmoji {
+    font-size: 2.2rem;
+    /* Make emoji slightly smaller than text if needed */
+    vertical-align: middle;
+}
+
+/* Styling for the message lines */
+/* These rules apply to the general informational text paragraphs. */
+.messageLine1,
+.messageLine2,
+.yourNameLine {
+    /* Sets the text color to a medium-dark rose, consistent with other text on glassy components. */
+    color: #B75D69;
+    /* Medium-dark rose, consistent with form text */
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.yourNameLine {
+    /* Makes the font slightly bolder. */
+    font-weight: 600;
+    /* Use a slightly stronger rose for your name */
+    color: #A34250;
+    /* Reduces the top margin to pull it slightly closer to the preceding line. */
+    margin-top: -0.25rem;
+    /* Adds some space below this line. */
+    margin-bottom: 0.5rem;
+}
+
+.envelopeEmoji {
+    font-size: 1rem;
+    vertical-align: middle;
+    margin-left: 0.25rem;
+}
+
+/* Styling for the subtle parenthetical message */
+/* This rule targets the "(He will think about it)" line. */
+.subtleMessage {
+    /* Sets a lighter, more muted rose color for less emphasis. */
+    color: #C78C94;
+    /* Lighter, more muted rose */
+    font-size: 0.95rem;
+    /* Reduces top margin to pull it closer to the line above. */
+    margin-top: -0.25rem;
+    /* Adds significant space below, before the button. */
+    margin-bottom: 1.5rem;
+}
+
+/* Styling for the "Submit Another" button */
+/* This rule styles the button that allows submitting another grievance. */
+.submitAnotherButton {
+    /* Applies a linear gradient background for a modern, vibrant look. */
+    background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+    /* Sets the text color to white for good contrast on the gradient. */
+    color: white;
+    /* Removes the default browser border. */
+    border: none;
+    /* Sets padding (top/bottom, left/right) inside the button. */
+    padding: 0.9rem 2rem;
+    /* Rounds the corners of the button. */
+    border-radius: 10px;
+    /* Specifies the font family, consistent with the project. */
+    font-family: 'Poppins', sans-serif;
+    /* Sets the font size for the button text. */
+    font-size: 1rem;
+    /* Makes the button text bold. */
+    font-weight: 600;
+    /* Changes the cursor to a pointer on hover to indicate interactivity. */
+    cursor: pointer;
+    /* Applies smooth transitions for hover effects (transform and box-shadow). */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* Adds space above the button. */
+    margin-top: 1rem;
+    /* Adds a subtle shadow below the button. */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the "Submit Another" button on hover */
+/* This provides visual feedback when the mouse hovers over the button. */
+.submitAnotherButton:hover {
+    /* Slightly lifts the button up. */
+    transform: translateY(-2px);
+    /* Enhances the shadow to create a glow effect. */
+    box-shadow: 0 6px 20px rgba(255, 126, 179, 0.4);
+}
+
+/* --- Media Queries for Responsiveness --- */
+/* These rules adjust styles for different screen sizes. */
+
+/* For tablets and smaller desktops (screens up to 768px wide) */
+@media (max-width: 768px) {
+
+    /* Adjusts the main container for medium screens. */
+    .thankYouContainer {
+        /* Reduces padding. */
+        padding: 2rem 1.5rem;
+        /* Reduces the gap between elements. */
+        gap: 0.6rem;
+    }
+
+    /* Adjusts the title for medium screens. */
+    .thankYouTitle {
+        /* Reduces font size. */
+        font-size: 2.2rem;
+    }
+
+    /* Adjusts message lines for medium screens. */
+    .messageLine1,
+    .messageLine2,
+    .yourNameLine {
+        /* Reduces font size. */
+        font-size: 1rem;
+    }
+
+    /* Adjusts subtle message for medium screens. */
+    .subtleMessage {
+        /* Reduces font size. */
+        font-size: 0.9rem;
+    }
+
+    /* Adjusts button for medium screens. */
+    .submitAnotherButton {
+        /* Reduces padding. */
+        padding: 0.8rem 1.5rem;
+        /* Reduces font size. */
+        font-size: 0.95rem;
+    }
+}
+
+/* For smaller mobile devices (screens up to 480px wide) */
+@media (max-width: 480px) {
+
+    /* Adjusts the main container for small screens. */
+    .thankYouContainer {
+        /* Further reduces padding. */
+        padding: 1.5rem 1rem;
+        /* Allows container to use more of the screen width. */
+        width: 95%;
+        /* Further reduces gap. */
+        gap: 0.5rem;
+    }
+
+    /* Adjusts title for small screens. */
+    .thankYouTitle {
+        /* Further reduces font size. */
+        font-size: 1.9rem;
+    }
+
+    /* Adjusts heart emoji size for small screens. */
+    .heartEmoji {
+        font-size: 1.7rem;
+    }
+
+    /* Adjusts message lines for small screens. */
+    .messageLine1,
+    .messageLine2,
+    .yourNameLine {
+        /* Further reduces font size. */
+        font-size: 0.9rem;
+    }
+
+    /* Adjusts subtle message for small screens. */
+    .subtleMessage {
+        /* Further reduces font size. */
+        font-size: 0.8rem;
+    }
+
+    /* Adjusts button for small screens. */
+    .submitAnotherButton {
+        /* Further reduces padding. */
+        padding: 0.75rem 1.2rem;
+        /* Further reduces font size. */
+        font-size: 0.9rem;
+        /* Sets button width to take up more space. */
+        width: 80%;
+        /* Sets a max width to prevent it from being overly wide even at 80%. */
+        max-width: 250px;
+    }
+}

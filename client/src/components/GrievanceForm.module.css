@@ -1,0 +1,266 @@
+/* Main container for the grievance form */
+.grievanceForm {
+    /* Glassmorphism: translucent background */
+    background: rgba(255, 255, 255, 0.1);
+    /* Backdrop filter for a frosted glass effect (requires browser support) */
+    backdrop-filter: blur(10px);
+    /* Fallback for older browsers or if backdrop-filter is not fully supported */
+    -webkit-backdrop-filter: blur(10px);
+    /* Rounded corners for the glassy panel */
+    border-radius: 20px;
+    /* A subtle border to enhance the glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    /* Padding inside the form */
+    padding: 2.5rem;
+    /* Soft shadow to lift the form off the page */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    /* Max width to keep it from getting too wide */
+    max-width: 600px;
+    /* Margin to center it and provide space */
+    margin: 2rem auto;
+    /* Flexbox for internal layout */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Space between form groups */
+    width: 90%;
+    /* Ensure it doesn't touch screen edges */
+}
+
+/* Title for the form */
+.formTitle {
+    /* Color that complements a modern, possibly darker, background */
+    color: #A34250;
+    /* White title for better contrast on a potentially darker/gradient background */
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2.8rem;
+    /* Slightly larger for the Pacifico font */
+    font-weight: normal;
+    /* Pacifico is already decorative */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    /* Subtle text shadow for depth */
+}
+
+/* Styling for each form group (label + input) */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* Space between label and input */
+}
+
+/* Styling for labels */
+.label {
+    font-weight: 600;
+    color: #A34250;
+    /* Light grey/white for text on a glassy/darker background */
+    font-size: 0.95rem;
+}
+
+/* Hint text for emojis next to labels */
+.emojiHint {
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: #cccccc;
+    margin-left: 0.5rem;
+}
+
+/* Common styling for input fields and textarea */
+.inputField,
+.textareaField,
+.selectField {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(183, 93, 105, 0.3);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #B75D69;
+    /* White text for input */
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.inputField::placeholder,
+.textareaField::placeholder {
+    color: #D4A3A9;
+    /* Lighter placeholder text */
+}
+
+.inputField:focus,
+.textareaField:focus,
+.selectField:focus {
+    outline: none;
+    border-color: rgba(163, 66, 80, 0.5);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Styling for select dropdowns */
+.selectField {
+    appearance: none;
+    /* Remove default system appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Add a custom arrow using background SVG */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23B75D69%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 0.65em auto;
+    padding-right: 2.5rem;
+    /* Make space for the arrow */
+}
+
+/* Make sure options in select are readable on dark/glassy background */
+.selectField option {
+    background-color: #f0a8b2;
+    /* Dark background for options dropdown */
+    color: #442225;
+    /* White text for options */
+}
+
+/* Styling for the custom text input field that appears when 'Other' is selected */
+.customInputField {
+    margin-top: 0.75rem;
+    /* Add some space above the custom input */
+}
+
+/* Specific styling for textarea */
+.textareaField {
+    resize: vertical;
+    /* Allow vertical resizing */
+    min-height: 100px;
+}
+
+/* Styling for the submit button */
+.submitButton {
+    padding: 0.9rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+    /* Romantic gradient */
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 1rem;
+    /* Add some space above the button */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 126, 179, 0.4);
+    /* Glow effect on hover */
+}
+
+/* General class for submission messages */
+.submissionMessage {
+    text-align: center;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/* Specific styling for success messages */
+.successMessage {
+    background-color: rgba(220, 245, 221, 0.3);
+    /* Light green with transparency */
+    color: #1B5E20;
+    /* Light green text */
+    border: 1px solid rgba(27, 94, 32, 0.35);
+}
+
+/* Specific styling for error messages */
+.errorMessage {
+    background-color: rgba(255, 220, 224, 0.3);
+    /* Light red with transparency */
+    color: #C62828;
+    /* Light red text */
+    border: 1px solid rgba(198, 40, 40, 0.35);
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* For tablets and smaller desktops */
+@media (max-width: 768px) {
+    .grievanceForm {
+        padding: 2rem;
+        /* Reduce padding */
+        gap: 1.2rem;
+        /* Reduce gap between form groups */
+        margin: 1rem auto;
+        /* Reduce top/bottom margin */
+    }
+
+    .formTitle {
+        font-size: 2.4rem;
+        /* Reduce title font size */
+    }
+
+    .label {
+        font-size: 0.9rem;
+    }
+
+    .inputField,
+    .textareaField,
+    .selectField {
+        padding: 0.8rem 0.9rem;
+        font-size: 0.95rem;
+    }
+
+    .submitButton {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+    }
+
+    .submissionMessage {
+        font-size: 0.9rem;
+    }
+}
+
+/* For smaller mobile devices */
+@media (max-width: 480px) {
+    .grievanceForm {
+        padding: 1.5rem;
+        /* Further reduce padding */
+        width: 95%;
+        /* Allow a bit more width if constrained */
+        gap: 1rem;
+    }
+
+    .formTitle {
+        font-size: 2rem;
+        /* Further reduce title font size */
+    }
+
+    .label {
+        font-size: 0.85rem;
+    }
+
+    .inputField,
+    .textareaField,
+    .selectField,
+    .customInputField {
+        padding: 0.75rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .selectField {
+        padding-right: 2.2rem;
+        /* Adjust for smaller arrow space */
+        background-size: 0.6em auto;
+    }
+
+    .submitButton {
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .submissionMessage {
+        font-size: 0.85rem;
+    }
+}

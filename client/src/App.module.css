@@ -1,0 +1,311 @@
+/* Styles for the main container of the App component. */
+.container {
+    /* Enables flexbox layout for its children. */
+    display: flex;
+    /* Arranges children in a column. */
+    flex-direction: column;
+    /* Centers children horizontally. */
+    align-items: center;
+    /* Centers children vertically (though with flex-direction: column, this primarily affects cross-axis alignment if there's extra space). */
+    justify-content: center;
+    /* Sets a maximum width for the container, so it doesn't get too wide on large screens. */
+    max-width: 500px;
+    /* Adds some margin around the container, especially useful on smaller screens where padding in #root might not be enough. */
+    margin: auto;
+    /* Centers the block element itself if max-width is applied */
+    /* Adds padding inside the container. */
+    padding: 2rem;
+    /* Adds a subtle background color to the card/container. */
+    background-color: #fff;
+    /* White background for the content card */
+    /* Adds rounded corners to the container. */
+    border-radius: 15px;
+    /* Adds a soft shadow to give a slight lift effect, making it feel more like a card. */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    /* Centers text within the container. */
+    text-align: center;
+}
+
+/* Styles for the main title/heading. */
+.title {
+    /* Sets the color of the title. Using a romantic, deep pink/purple. */
+    color: #c2185b;
+    /* A deeper pink for headings */
+    /* Adds some margin below the title. */
+    margin-bottom: 0.75rem;
+    /* Sets the font size for the title. */
+    font-size: 2.5rem;
+    /* Larger font for the special Pacifico title */
+}
+
+/* Styles for subtitle text or general paragraphs. */
+.subtitle {
+    /* Sets the color for subtitle text. */
+    color: #555;
+    /* Adds some margin below the subtitle. */
+    margin-bottom: 1.5rem;
+    /* Sets the font size for subtitles. */
+    font-size: 1rem;
+}
+
+/* Styles for the input field where the code is entered. */
+.inputField {
+    /* Sets the width of the input field to be a percentage of its container. */
+    width: 80%;
+    /* Adds padding inside the input field for text. */
+    padding: 0.75rem 1rem;
+    /* Adds margin below the input field. */
+    margin-bottom: 1rem;
+    /* Adds a border to the input field. */
+    border: 1px solid #ddd;
+    /* Adds rounded corners to the input field. */
+    border-radius: 8px;
+    /* Sets the font size inside the input field. */
+    font-size: 1rem;
+    /* Inherits font family from the body. */
+    font-family: inherit;
+}
+
+/* Styles for the verification button. */
+.verifyButton {
+    /* Sets the background color of the button. A vibrant, inviting pink. */
+    background-color: #e91e63;
+    /* Hot pink for buttons */
+    /* Sets the text color of the button. */
+    color: white;
+    /* Removes the default border from the button. */
+    border: none;
+    /* Adds padding inside the button. */
+    padding: 0.75rem 1.5rem;
+    /* Adds rounded corners to the button. */
+    border-radius: 8px;
+    /* Sets the font size for the button text. */
+    font-size: 1rem;
+    /* Inherits font family. */
+    font-family: inherit;
+    /* Changes the cursor to a pointer on hover to indicate it's clickable. */
+    cursor: pointer;
+    /* Adds a transition effect for hover states. */
+    transition: background-color 0.3s ease;
+    /* Adds some margin below the button, especially if an error message appears. */
+    margin-bottom: 1rem;
+}
+
+/* Styles for the verification button when hovered over. */
+.verifyButton:hover {
+    /* Darkens the background color slightly on hover for feedback. */
+    background-color: #c2185b;
+    /* Darker pink on hover */
+}
+
+/* Styles for error messages. */
+.errorMessage {
+    /* Sets the color of the error message text. */
+    color: #d32f2f;
+    /* A standard error red color */
+    /* Adds some margin above the error message if it appears. */
+    margin-top: 0.5rem;
+    /* Sets the font size for error messages. */
+    font-size: 0.9rem;
+}
+
+/* Styles for the authentication container (code verification screen) */
+.authContainer {
+    /* Glassmorphism: translucent background */
+    background: rgba(255, 255, 255, 0.15);
+    /* Slightly more opaque for readability */
+    /* Backdrop filter for a frosted glass effect */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    /* Rounded corners */
+    border-radius: 20px;
+    /* Subtle border to enhance the glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Padding inside the container */
+    padding: 2.5rem;
+    /* Soft shadow */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    /* Max width */
+    max-width: 500px;
+    width: 90%;
+    /* Ensure it doesn't touch screen edges on small devices */
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1rem;
+    /* Spacing between elements */
+}
+
+/* Styles for the main title/heading in the auth screen. */
+.title {
+    color: #A34250;
+    /* Vibrant dark rose */
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow for depth */
+}
+
+/* Styles for subtitle text in the auth screen. */
+.subtitle {
+    color: #B75D69;
+    /* Medium-dark rose */
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+}
+
+/* Styles for the input field in the auth screen. */
+.inputField {
+    width: 90%;
+    /* Adjust width for better fit on mobile */
+    padding: 0.85rem 1rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid rgba(183, 93, 105, 0.3);
+    /* Border reflecting text tone */
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #B75D69;
+    /* Medium-dark rose for input text */
+    font-size: 1rem;
+    font-family: inherit;
+    text-align: center;
+}
+
+.inputField::placeholder {
+    color: #D4A3A9;
+    /* Lighter muted rose for placeholder */
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: rgba(163, 66, 80, 0.5);
+    /* Focus border matching title color tone */
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Styles for the verification button in the auth screen. */
+.verifyButton {
+    background-image: linear-gradient(to right, #ff758c 0%, #ff7eb3 100%);
+    color: white;
+    /* White text on gradient button is fine */
+    border: none;
+    padding: 0.85rem 1.5rem;
+    /* Slightly reduce padding for smaller screens */
+    border-radius: 10px;
+    font-size: 0.95rem;
+    /* Slightly reduce font size */
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 70%;
+    /* Ensure button is not overly wide */
+    max-width: 280px;
+    /* Max width for the button */
+}
+
+.verifyButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 126, 179, 0.4);
+}
+
+/* Styles for error messages in the auth screen. */
+.errorMessage {
+    color: #C62828;
+    /* Dark red for error text */
+    background-color: rgba(255, 220, 224, 0.3);
+    /* Light pinkish, transparent bg for error */
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    border: 1px solid rgba(198, 40, 40, 0.35);
+    width: 90%;
+    /* Adjust width to match input field */
+}
+
+/* Container for the main app content (GrievanceForm) after authentication */
+/* This class can be used if specific overall styling is needed for the authenticated view */
+.mainAppContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Media Queries for Responsiveness --- */
+
+/* For tablets and smaller desktops */
+@media (max-width: 768px) {
+    .authContainer {
+        padding: 2rem;
+        /* Reduce padding */
+        gap: 0.8rem;
+    }
+
+    .title {
+        font-size: 2.2rem;
+        /* Reduce title font size */
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+        /* Reduce subtitle font size */
+        margin-bottom: 1rem;
+    }
+
+    .inputField {
+        width: 100%;
+        /* Allow full width within container */
+        font-size: 0.95rem;
+    }
+
+    .verifyButton {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+        width: 80%;
+    }
+
+    .errorMessage {
+        width: 100%;
+        /* Allow full width */
+        font-size: 0.85rem;
+    }
+}
+
+/* For smaller mobile devices */
+@media (max-width: 480px) {
+    .authContainer {
+        padding: 1.5rem;
+        /* Further reduce padding */
+        width: 95%;
+        /* Allow a bit more width if constrained by viewport */
+        gap: 0.7rem;
+    }
+
+    .title {
+        font-size: 1.8rem;
+        /* Further reduce title font size */
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        /* Further reduce subtitle font size */
+    }
+
+    .inputField,
+    .errorMessage {
+        font-size: 0.9rem;
+    }
+
+    .verifyButton {
+        width: 90%;
+        font-size: 0.85rem;
+        padding: 0.75rem 1rem;
+    }
+}

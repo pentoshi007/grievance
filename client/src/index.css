@@ -1,0 +1,81 @@
+/* This is a CSS reset to remove default browser styling for margins and paddings, and set box-sizing to border-box for easier layout management. */
+*,
+*::before,
+*::after {
+    /* Removes default margin from all elements */
+    margin: 0;
+    /* Removes default padding from all elements */
+    padding: 0;
+    /* Changes the box model so that padding and border do not increase the element's total width/height */
+    box-sizing: border-box;
+}
+
+/* Styles for the main body of the HTML document. */
+body {
+    /* Sets the primary font family to 'Poppins' with a generic sans-serif fallback. */
+    /* We also added 'Pacifico' in index.html for special headings or text. */
+    font-family: 'Poppins', sans-serif;
+    /* Sets a default line height for better readability. */
+    line-height: 1.6;
+    /* Using a solid, consistent soft pink background */
+    background-color: pink;
+    /* background-color: #f0a8b2; */
+    /* This was the pinker shade from the previous gradient */
+    /* Darker, warm-toned text color for better general contrast */
+    color: #442225;
+    /* Dark muted rose for default text */
+    /* Ensures the body takes at least the full height of the viewport. */
+    min-height: 100vh;
+    /* Enables flexbox layout for centering content. */
+    display: flex;
+    /* Centers content horizontally. */
+    justify-content: center;
+    /* Centers content vertically. */
+    align-items: center;
+    /* Prevent horizontal scrollbars if content slightly overflows during transitions/animations */
+    overflow-x: hidden;
+}
+
+/* Styles for the root div where the React app is mounted. */
+#root {
+    /* Allows the root div to take up the full width available from its parent (body). */
+    width: 100%;
+    /* Allows the root div to take up the full height available. */
+    height: 100%;
+    /* Enables flexbox for its children (our App component). */
+    display: flex;
+    /* Centers children horizontally. */
+    justify-content: center;
+    /* Centers children vertically. */
+    align-items: center;
+    /* Adds some padding, especially for smaller screens. */
+    padding: 1rem;
+}
+
+/* A class for text that should use the Pacifico font (the more cursive, loving font) */
+.font-pacifico {
+    font-family: 'Pacifico', cursive;
+}
+
+/* Scrollbar styling to complement the soft pink theme */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    /* Lighter track for pinkish theme */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(240, 163, 173, 0.6);
+    /* Adjusted to be a bit more visible if needed, based on #ee9ca7 */
+    /* Pinkish thumb, matching the gradient's vibe */
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(239, 162, 172, 0.8);
+    /* Darker pinkish thumb on hover */
+}
