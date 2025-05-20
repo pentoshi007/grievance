@@ -5,18 +5,27 @@ const Grievance = require('../models/Grievance');
 // This is an asynchronous function to handle the creation of a new grievance.
 // It's an Express route handler, so it takes 'req' (request) and 'res' (response) objects as arguments.
 const createGrievance = async (req, res) => {
-    // This line destructures the title, description, mood, and severity from the request body (req.body).
+    // This line destructures the title, description, mood, severity, latitude, and longitude from the request body (req.body).
     // These are the details of the grievance submitted by the user.
-    const { title, description, mood, severity } = req.body;
+    const { title, description, mood, severity, latitude, longitude } = req.body;
+
+    // Retrieve the client's IP address from the req object.
+    const ipAddress = req.ip;
 
     // This block attempts to execute code that might throw an error (e.g., database operation failure).
     try {
         // This line creates a new Grievance document using the data received in the request body.
+        // It includes the new ipAddress and geolocation fields.
         const newGrievance = new Grievance({
             title,
             description,
             mood,
-            severity
+            severity,
+            ipAddress,
+            geolocation: {
+                latitude: latitude || null,
+                longitude: longitude || null
+            }
         });
 
         // This line saves the newly created grievance document to the MongoDB database.

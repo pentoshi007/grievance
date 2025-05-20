@@ -37,6 +37,27 @@ const grievanceSchema = new Schema({
     severity: {
         type: String,
         trim: true
+    },
+    // The 'ipAddress' field for the grievance.
+    // It stores the IP address of the user submitting the grievance.
+    ipAddress: {
+        type: String,
+        trim: true
+    },
+    // The 'geolocation' field for the grievance.
+    // It stores the latitude and longitude of the user.
+    geolocation: {
+        type: Object,
+        properties: {
+            latitude: {
+                type: String,
+                trim: true
+            },
+            longitude: {
+                type: String,
+                trim: true
+            }
+        }
     }
 }, {
     // The 'timestamps' option.
