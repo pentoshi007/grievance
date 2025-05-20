@@ -45,6 +45,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
 
     const [message, setMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
+    const [isFetchingLocation, setIsFetchingLocation] = useState(false); // State for geolocation fetching
 
     // Define the base API URL from the environment variable
     // In development, if VITE_APP_API_URL is not set, it will default to an empty string,
@@ -117,10 +118,37 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
             // Same as above
         }
 
+        setIsFetchingLocation(true);
+        let locationData = null;
+
+        if (navigator.geolocation) {
+            try {
+                const position = await new Promise((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+                locationData = {
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                };
+            } catch (error) {
+                console.error("Error getting geolocation:", error);
+                // Proceed without location data, locationData remains null
+            }
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+        setIsFetchingLocation(false);
+
+        const submissionData = { ...formData };
+        if (locationData) {
+            submissionData.latitude = locationData.latitude;
+            submissionData.longitude = locationData.longitude;
+        }
+
         try {
             // Use the API_URL prefix for the request
             // The path becomes `${API_URL}/api/grievances`
-            await axios.post(`${API_URL}/api/grievances`, formData);
+            await axios.post(`${API_URL}/api/grievances`, submissionData);
             // Clear form and local states
             setFormData({ title: '', description: '', mood: '', severity: '' });
             setSelectedMoodValue('');
@@ -156,6 +184,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
                     onChange={handleTextChange}
                     placeholder="What shall we call this episode?"
                     className={styles.inputField}
+                    disabled={isFetchingLocation}
                 />
             </div>
 
@@ -169,6 +198,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
                     placeholder="Pour your heart out... or just vent a little."
                     className={styles.textareaField}
                     rows="4"
+                    disabled={isFetchingLocation}
                 />
             </div>
 
@@ -181,6 +211,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
                     value={selectedMoodValue}
                     onChange={handleMoodSelectChange}
                     className={styles.selectField}
+                    disabled={isFetchingLocation}
                 >
                     {moodOptions.map(option => (
                         <option key={option.value} value={option.value}>
@@ -196,6 +227,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
                         onChange={handleCustomMoodChange}
                         placeholder="Describe the mood..."
                         className={`${styles.inputField} ${styles.customInputField}`}
+                        disabled={isFetchingLocation}
                     />
                 )}
             </div>
@@ -209,6 +241,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
                     value={selectedSeverityValue}
                     onChange={handleSeveritySelectChange}
                     className={styles.selectField}
+                    disabled={isFetchingLocation}
                 >
                     {severityOptions.map(option => (
                         <option key={option.value} value={option.value}>
@@ -224,12 +257,13 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
                         onChange={handleCustomSeverityChange}
                         placeholder="Describe the severity..."
                         className={`${styles.inputField} ${styles.customInputField}`}
+                        disabled={isFetchingLocation}
                     />
                 )}
             </div>
 
-            <button type="submit" className={styles.submitButton}>
-                Submit ❤️
+            <button type="submit" className={styles.submitButton} disabled={isFetchingLocation}>
+                {isFetchingLocation ? 'Fetching location...' : 'Submit ❤️'}
             </button>
 
             {/* This message will now primarily show validation errors or if the submission itself fails */}
