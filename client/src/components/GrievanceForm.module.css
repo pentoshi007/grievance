@@ -183,6 +183,18 @@
     border: 1px solid rgba(198, 40, 40, 0.35);
 }
 
+/* Specific styling for informational messages */
+.infoMessage {
+    background-color: rgba(227, 242, 253, 0.3); /* Light blue background */
+    color: #2196F3; /* Blue text */
+    border: 1px solid rgba(33, 150, 243, 0.35); /* Blue border */
+    text-align: center;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
 /* --- Media Queries for Responsiveness --- */
 
 /* For tablets and smaller desktops */

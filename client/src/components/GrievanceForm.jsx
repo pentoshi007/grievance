@@ -46,6 +46,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
     const [message, setMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
     const [isFetchingLocation, setIsFetchingLocation] = useState(false); // State for geolocation fetching
+    const [geolocationSkippedOrFailed, setGeolocationSkippedOrFailed] = useState(false);
 
     // Define the base API URL from the environment variable
     // In development, if VITE_APP_API_URL is not set, it will default to an empty string,
@@ -132,10 +133,14 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
                 };
             } catch (error) {
                 console.error("Error getting geolocation:", error);
-                // Proceed without location data, locationData remains null
+                locationData = null; // Ensure locationData is null
+                setGeolocationSkippedOrFailed(true);
+                // Proceed without location data
             }
         } else {
             console.log("Geolocation is not supported by this browser.");
+            locationData = null; // Ensure locationData is null
+            setGeolocationSkippedOrFailed(true);
         }
         setIsFetchingLocation(false);
 
@@ -157,6 +162,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
             setCustomSeverityText('');
             setMessage(''); // Clear any local validation messages
             setIsSuccess(false); // Reset local success flag
+            setGeolocationSkippedOrFailed(false); // Reset geolocation skipped/failed message
 
             // Call the callback to notify App.jsx of successful submission
             if (onFormSubmitSuccess) {
@@ -166,6 +172,7 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
             // Handle submission error locally within the form if desired
             setMessage('Oh no! Something went wrong. Please try again. (' + (error.response?.data?.message || error.message) + ')');
             setIsSuccess(false);
+            setGeolocationSkippedOrFailed(false); // Reset geolocation skipped/failed message
             console.error('Error submitting grievance:', error);
         }
     };
@@ -270,6 +277,12 @@ const GrievanceForm = ({ onFormSubmitSuccess }) => {
             {message && (
                 <p className={`${styles.submissionMessage} ${isSuccess ? styles.successMessage : styles.errorMessage}`}>
                     {message}
+                </p>
+            )}
+
+            {geolocationSkippedOrFailed && !isFetchingLocation && (
+                <p className={styles.infoMessage}>
+                    Could not fetch precise location. We will attempt to approximate your location based on your IP address.
                 </p>
             )}
         </form>
