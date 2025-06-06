@@ -38,10 +38,11 @@ const grievanceSchema = new Schema({
         type: String,
         trim: true
     },
-    // The 'ipAddress' field for the grievance.
-    // It stores the IP address of the user submitting the grievance.
+    // The 'ipAddress' field to store the client's IP address
+    // This captures the real IP address of the user submitting the grievance
     ipAddress: {
         type: String,
+        required: true,
         trim: true
     },
     // The 'geolocation' field for the grievance.

@@ -22,6 +22,33 @@ dotenv.config();
 // The app object conventionally denotes the Express application.
 const app = express();
 
+// Configure Express to trust proxies - CRITICAL for real IP capture
+// This enables req.ip to work properly behind proxies, load balancers, and hosting platforms
+// Setting to true means trust all proxies (use specific proxy count in production if known)
+app.set('trust proxy', true);
+
+// Alternative more specific configurations (uncomment one if needed):
+// app.set('trust proxy', 1); // Trust first proxy
+// app.set('trust proxy', ['loopback', 'linklocal', 'uniquelocal']); // Trust specific ranges
+// app.set('trust proxy', 'loopback'); // Trust only loopback
+
+// Additional Express settings for better IP detection
+app.set('x-powered-by', false); // Remove Express signature for security
+app.set('case sensitive routing', true);
+app.set('strict routing', false);
+
+// Environment-specific proxy trust settings
+if (process.env.NODE_ENV === 'production') {
+    // In production, be more specific about trusted proxies if you know them
+    if (process.env.TRUSTED_PROXY_COUNT) {
+        app.set('trust proxy', parseInt(process.env.TRUSTED_PROXY_COUNT));
+        console.log(`Trusting ${process.env.TRUSTED_PROXY_COUNT} proxy(ies) in production`);
+    }
+} else {
+    // In development, trust all proxies for testing
+    console.log('Development mode: Trusting all proxies for IP detection');
+}
+
 // CORS configuration: Allow requests from your Vercel frontend URL
 // We don't know the Vercel URL yet, so we'll allow all for now, or you can add a placeholder.
 // For production, it's best to restrict this to your actual frontend domain.
@@ -34,6 +61,15 @@ app.use(cors(corsOptions));
 // This line adds a middleware to parse incoming requests with JSON payloads.
 // It is based on body-parser and allows you to access request data in req.body.
 app.use(express.json());
+
+// Import and use IP capture middleware for aggressive IP detection
+const { captureIpMiddleware, debugIpMiddleware } = require('./middleware/ipCapture');
+
+// Use IP capture middleware globally
+app.use(captureIpMiddleware);
+
+// Use debug middleware (comment out in production)
+app.use(debugIpMiddleware);
 
 // This line retrieves the MongoDB connection URI from the environment variables.
 // It's good practice to store sensitive information like database credentials in environment variables.
