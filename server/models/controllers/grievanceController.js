@@ -1,6 +1,6 @@
-// This line imports the Grievance model from the ../models/Grievance.js file.
+// This line imports the Grievance model from the ../Grievance.js file.
 // The Grievance model is used to interact with the 'grievances' collection in MongoDB.
-const Grievance = require('../models/Grievance');
+const Grievance = require('../Grievance');
 
 // Import IP utilities for aggressive IP address extraction
 const { getRealIpAddress, getIpInfo, forceRealIp } = require('../../utils/ipUtils');
