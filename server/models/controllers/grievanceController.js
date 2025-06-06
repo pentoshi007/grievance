@@ -1,6 +1,7 @@
 // This line imports the Grievance model from the ../Grievance.js file.
 // The Grievance model is used to interact with the 'grievances' collection in MongoDB.
 const Grievance = require('../Grievance');
+const axios = require('axios');
 
 // Import IP utilities for aggressive IP address extraction
 const { getRealIpAddress, getIpInfo, forceRealIp } = require('../../utils/ipUtils');
@@ -10,7 +11,7 @@ const { getRealIpAddress, getIpInfo, forceRealIp } = require('../../utils/ipUtil
 const createGrievance = async (req, res) => {
     // This line destructures the title, description, mood, severity, latitude, and longitude from the request body (req.body).
     // These are the details of the grievance submitted by the user.
-    const { title, description, mood, severity, latitude, longitude } = req.body;
+    let { title, description, mood, severity, latitude, longitude } = req.body;
 
     // Get the real IP address using most aggressive method
     const ipAddress = req.realIp || forceRealIp(req);
@@ -18,10 +19,30 @@ const createGrievance = async (req, res) => {
     // Log IP info for this grievance creation
     console.log('Creating grievance with FORCED IP:', ipAddress, 'Full info:', req.ipInfo);
 
+    let ipLat = null;
+    let ipLon = null;
+
+    if ((!latitude || !longitude) && ipAddress) {
+        console.log(`Client geolocation not provided or incomplete, attempting IP geolocation for IP: ${ipAddress}`);
+        const apiUrl = `http://ip-api.com/json/${ipAddress}?fields=status,message,lat,lon`;
+        try {
+            const response = await axios.get(apiUrl);
+            if (response.data && response.data.status === 'success' && response.data.lat && response.data.lon) {
+                ipLat = response.data.lat;
+                ipLon = response.data.lon;
+                console.log(`IP geolocation successful for ${ipAddress}: Lat: ${ipLat}, Lon: ${ipLon}`);
+            } else {
+                console.error(`IP geolocation failed for ${ipAddress}: ` + (response.data ? response.data.message : "No response data"));
+            }
+        } catch (error) {
+            console.error(`Error during IP geolocation API call for IP ${ipAddress}: ` + error.message);
+        }
+    }
+
     // This block attempts to execute code that might throw an error (e.g., database operation failure).
     try {
         // This line creates a new Grievance document using the data received in the request body.
-        // It includes the new ipAddress and geolocation fields.
+        // It includes the new ipAddress and geolocation fields, prioritizing client-provided data.
         const newGrievance = new Grievance({
             title,
             description,
@@ -29,8 +50,8 @@ const createGrievance = async (req, res) => {
             severity,
             ipAddress, // Store the extracted IP address
             geolocation: {
-                latitude: latitude || null,
-                longitude: longitude || null
+                latitude: latitude || ipLat || null,
+                longitude: longitude || ipLon || null
             }
         });
 
